@@ -1,0 +1,112 @@
+    ul#menu li 
+	{
+		display: inline;
+        font-family: "Arial Verdana", Arial, Sans-serif;
+
+
+    }
+    ul#menu li a
+    {
+        color: #6E6E6E;
+    }
+    ul#menu1 li
+    {
+        margin-right: 25px;
+        margin-bottom: 2px;
+        font-family: "Arial Verdana", Arial, Sans-serif;
+        list-style-type:none;
+        
+        
+    }
+    ul#menu1 li a
+    {
+        
+        color: #6E6E6E;
+        
+    }
+	#mainblock{
+		width: 770px;
+		height: 100%;
+		background-image: url("http://cs-server.usc.edu:45678/hw/hw3/images/side_main.png");
+        background-repeat: no-repeat;
+		background-color: white;
+		
+
+	}
+	#left{
+		float: left;
+		display:inline;
+        width: 25%;
+        height: 210px;
+    	background-color: white;
+    	text-align: right;
+    	background-image: url("http://cs-server.usc.edu:45678/hw/hw3/images/side_top.png"), url("http://cs-server.usc.edu:45678/hw/hw3/images/side_bottom.png");
+    	background-repeat: no-repeat;
+    	background-position: top left, bottom right;
+        background-size: 100%;
+    	line-height: 12pt;
+    	margin-left: 30px;
+        margin-top: 15px;
+        
+        }
+	
+    #right{
+
+		float: right;
+		width: 70%;
+    	height: 500px;
+    	background: white;
+    	background-image: url('http://cs-server.usc.edu:45678/hw/hw3/images/header.png'), url('http://cs-server.usc.edu:45678/hw/hw3/images/footer.png');
+    	background-repeat: no-repeat;
+    	background-position: top left, bottom right;
+        background-size: 100%;
+    	font-size: 100%;
+    	line-height: 12pt;
+        margin-top: 13px;
+        }
+        #header
+        {
+            font-family: "Arial Verdana", Arial, Sans-serif;
+            width: 900px;
+        }
+        #footer
+        {
+            list-style-type:none;
+            text-align: center;
+            margin-top: 110px;
+            margin-left: 0px;
+            font-size: 12px;
+            color: #6E6E6E;
+        }
+        h2{
+            margin-left: 10px;
+            line-height: 5pt;
+            font-family: "Arial Verdana", Arial, Sans-serif;
+            font-size: 20px;
+        }
+        h2#one{
+            margin-right: 24px;
+        }
+        p
+        {
+          margin-left: 9px; 
+          font-family: "Arial Verdana", Arial, Sans-serif;
+          font-size: 15px; 
+
+        }
+        h3{
+            margin-left: 350px;
+            font-family: "Arial Verdana", Arial, Sans-serif;
+            color:#D8D8D8;
+        }
+        h2#two
+        {
+            font-family: trebuchet MS ;
+        }
+        h2#two span#magzname
+        {
+            color: #A4A4A4;
+        }
+	body{
+        background-color: #E6E6E6;
+        }
