@@ -1,0 +1,183 @@
+<html>
+<head>
+<title>Network List</title>
+<!--
+<BODY>
+This is for USC disclaimer
+</BODY>
+-->
+<script>
+
+function generateHTML(xmlDoc)
+   {  ELEMENT_NODE = 1;    // MS parser doesn't define Node.ELEMENT_NODE
+           root=xmlDoc.DocumentElement;
+           html_text="<html><head><title>Stocks Table</title></head><body>";
+           html_text+="<table border='2'>";
+           tabledata=xmlDoc.getElementsByTagName("Table");
+           tableNodeList=tabledata.item(0).childNodes;
+           headerdata=xmlDoc.getElementsByTagName("Header");
+           headerNodeList=headerdata.item(0).childNodes;
+           insideheader=xmlDoc.getElementsByTagName("Data");
+           insideheaderNodeList=insideheader.item(0).childNodes;
+           rowdata=xmlDoc.getElementsByTagName("Row");
+           rowNodeList=[];
+           feedslist=[];
+           k=0;
+           for(i=0;i<rowdata.length;i++)
+           {
+                rowNodeList[i]=rowdata.item(i).childNodes;
+           }
+    if(rowNodeList.length == "")
+    {
+        alert("NO NETWORKS FOUND");
+    }
+    
+           feedsdata=xmlDoc.getElementsByTagName("Feeds");
+            feedsdataNodeList=feedsdata.item(0).childNodes;
+           html_text+="<tbody>";
+           html_text+="<tr>";
+           x=0;  y=0;
+	   // output the headers
+           for(i=0;i<insideheader.length;i++)
+           {    header=insideheader.item(i).innerHTML;
+				   if(header=="Network")
+				   {  header="Network";  x=120;  y=55;  }
+				   if(header=="Owner")
+				   {  header="Owner";  x=100;  y=67;  }
+				   if(header=="Feeds")
+				       header="Feeds";
+ if(header=="Notes")  header="Notes";
+ if(header=="HomePage")    header="HomePage";
+ if(header=="Logo")  header="Logo";              
+			html_text+="<th>"+header+"</th>";  }  
+            html_text+="</tr>";
+           // output out the values
+                   
+           for(i=0;i<rowNodeList.length;i++)
+           {
+               
+               html_text+="<tr>";
+               for(m=0;m<rowNodeList[i].length;m++)
+               {
+               if(rowNodeList[i].item(m).nodeName=="Network")
+               {
+                   html_text+="<td>"+rowNodeList[i].item(m).innerHTML+"</td>";
+               }
+               
+               
+               if(rowNodeList[i].item(m).nodeName=="Owner")
+               {
+                   html_text+="<td>"+rowNodeList[i].item(m).innerHTML+"</td>";
+               }
+               
+               
+               if(rowNodeList[i].item(m).nodeName=="Feeds")
+               {
+                   feeds=rowNodeList[i].item(m).childNodes;
+                   html_text+="<td><ul>";
+                   for(j=0;j<feeds.length;j++)
+                   {
+                       if(feeds.item(j).nodeName=="Feed")
+                       {
+                           html_text+="<li>"+feeds.item(j).innerHTML+"</li>";
+                       }
+                   }
+                   html_text+="</ul></td>";
+               }
+               
+               
+               if(rowNodeList[i].item(m).nodeName=="Notes")
+               {
+                   html_text+="<td>"+rowNodeList[i].item(m).innerHTML+"</td>";
+               }
+               
+               
+               if(rowNodeList[i].item(m).nodeName=="HomePage")
+               {
+                   html_text+="<td><a href=\""+rowNodeList[i].item(m).innerHTML+ "\">" +rowNodeList[i].item(m).innerHTML+"</a></td>";
+               }
+               
+               
+               if(rowNodeList[i].item(m).nodeName=="Logo")
+               {
+                   html_text+="<td><img src=\""+rowNodeList[i].item(m).innerHTML+"\"/></td>";
+               }
+               }
+                  
+               }
+                              html_text+="</tr>";
+               
+               
+           
+           
+           
+           html_text+="</tbody>";  html_text+="</table>";
+           html_text+="</body></html>";  
+}
+
+  function loadXML(formval) {
+      var url = formval.URL.value;
+      if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();   }
+ else {// code for IE6, IE5
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");  }
+  try{
+        xmlhttp.open("GET",url,false);
+        xmlhttp.send();
+  }
+catch(err){
+        alert("FILE NOT FOUND!!!");
+        } 
+      if(xmlhttp.status == 404)
+   {alert("FILE NOT FOUND!!!");}
+        
+        xmlDoc=xmlhttp.responseXML;
+if (window.ActiveXObject) //if IE, simply execute script (due to async prop).
+ {  
+     if (xmlDoc.documentElement.nodeName == "parseerror")
+     {
+         alert("INVALID FILE");
+         //errStr = xmlDoc.documentElement.childNodes[0].nodeValue;
+    //    errStr = errStr.replace(/</g, "&lt;");
+      //  document.write(errStr);
+     //xmlDoc.parseError.errorCode != 0
+   //var myErr = xmlDoc.parseError;
+    //generateError(xmlDoc);
+   //hWin = window.open("", "Error", "height=300,width=340");
+  //hWin.document.write(html_text);
+    
+     } 
+  else {  generateHTML(xmlDoc);
+            hWin = window.open("", "Assignment4", "height=800,width=600");
+           hWin.document.write(html_text);   }
+ } 
+    else //else if FF, execute script once XML object has loaded
+ {  
+     if (xmlDoc.documentElement.nodeName == "parsererror")
+     {
+         alert("INVALID FILE");
+         return;
+    } 
+    xmlDoc.onload=generateHTML(xmlDoc);
+    hWin = window.open("", "Assignment4", "height=800,width=600");
+    hWin.document.write(html_text);  }
+ //hWin.document.close();  
+  }   
+    
+ </script>
+ </head>
+<body style="margin-top:100px">
+    <p><center>Enter URL for Company List XML File</center></p>
+<br>
+    <center>
+<form name="myform" method="POST" id="location">
+<input type="text" name="URL" maxlength="25" size="30"/>
+<br/>
+    <br>
+<input type="button" name="submit" value="Submit Query" onClick="loadXML(this.form)" />
+</form>
+    </center>
+    <noscript>
+</body>
+</html>
